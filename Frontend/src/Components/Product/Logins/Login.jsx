@@ -48,6 +48,7 @@ const Login = ({ onAuthSuccess, setUser }) => {
             }
         } catch (error) {
             setError(
+                console.log(error),
                 error?.response?.data?.error ||
                 error?.response?.data?.message ||
                 "Login failed"

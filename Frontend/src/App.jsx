@@ -4,17 +4,14 @@ import "aos/dist/aos.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import {Home}from './Components/Product/Home'
 import { useState } from 'react';
-import Login from './Components/product/Login/Login'
-import Signup from './Components/product/Login/Signup';
-
-
+import Login from './Components/Product/Logins/Login';
+import Signup from './Components/Product/Logins/Signup';
 import { Profile } from './Components/Product/ClickingPges';
 import LoanPendingListComponent from './Components/clickpages/LoanDash';
+import { Testing } from './Components/Product/Testing';
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('jwt'));
   console.log(localStorage.getItem("jwt"))
-
-  // Callback to update authentication after login/signup
   const handleAuthSuccess = () => setIsAuthenticated(true);
 
   // Callback for logout
@@ -53,6 +50,7 @@ export default function App() {
           isAuthenticated ? <LoanPendingListComponent logout={handleLogout} /> :
             <Navigate to="/login" />
         } />
+        <Route path='/testing' element={<Testing/>} />
 
 
       </Routes>
