@@ -1,0 +1,77 @@
+       /* src/index.css */
+       @import "tailwindcss";
+       @plugin "daisyui";
+
+       @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mozilla+Headline:wght@200..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+       @tailwind base;
+       @tailwind components;
+       @tailwind utilities ;
+       body {
+  font-family: 'Poppins', sans-serif;
+}
+       .bg {
+         background: #000000;
+         background: linear-gradient(159deg, rgba(0, 0, 0, 1) 59%, rgba(52, 5, 99, 1) 93%, rgba(52, 5, 99, 1) 67%);
+       }
+
+       .title {
+
+         background: #5d2d9c;
+         background: linear-gradient(165deg, rgba(93, 45, 156, 1) 1%, rgba(1, 13, 5, 1) 50%, rgba(93, 45, 156, 1) 100%);
+       }
+
+       .box {
+         background: #221530;
+         background: linear-gradient(165deg, rgba(34, 21, 48, 1) 0%, rgba(25, 4, 54, 1) 50%, rgba(23, 10, 43, 1) 100%);
+       }
+
+       .box2 {
+         background-image: linear-gradient(130deg,
+             hsl(328deg 66% 33%) 0%,
+             hsl(328deg 56% 28%) 6%,
+             hsl(327deg 45% 22%) 13%,
+             hsl(321deg 33% 16%) 22%,
+             hsl(273deg 17% 11%) 32%,
+             hsl(212deg 32% 8%) 44%,
+             hsl(212deg 32% 8%) 57%,
+             hsl(212deg 32% 8%) 72%,
+             hsl(212deg 32% 8%) 87%,
+             hsl(212deg 32% 8%) 100%);
+       }
+
+       .but {
+         background-image: linear-gradient(45deg,
+             hsl(298deg 74% 24%) 0%,
+             hsl(313deg 100% 21%) 8%,
+             hsl(323deg 100% 21%) 17%,
+             hsl(331deg 100% 20%) 25%,
+             hsl(340deg 93% 19%) 33%,
+             hsl(351deg 75% 19%) 42%,
+             hsl(6deg 72% 17%) 50%,
+             hsl(19deg 93% 13%) 58%,
+             hsl(27deg 100% 11%) 67%,
+             hsl(33deg 100% 9%) 75%,
+             hsl(40deg 100% 7%) 83%,
+             hsl(47deg 99% 6%) 92%,
+             hsl(53deg 64% 5%) 100%);
+       }
+
+       .box3 {
+         background-image: linear-gradient(140deg,
+             hsl(319deg 93% 17%) 0%,
+             hsl(320deg 100% 15%) -1%,
+             hsl(321deg 100% 13%) -1%,
+             hsl(323deg 100% 11%) 1%,
+             hsl(325deg 100% 10%) 7%,
+             hsl(0deg 0% 0%) 41%);
+       }
+
+       .slide {
+         background-image: linear-gradient(140deg,
+             hsl(319deg 93% 17%) 0%,
+             hsl(320deg 100% 15%) -1%,
+             hsl(321deg 100% 13%) -1%,
+             hsl(323deg 100% 11%) 1%,
+             hsl(325deg 100% 10%) 7%,
+             hsl(0deg 0% 0%) 41%);
+       }
