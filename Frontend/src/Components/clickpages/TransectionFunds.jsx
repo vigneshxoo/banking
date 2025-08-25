@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../Api";
+import api from "../../Api";
 
 export const TransferFunds = ({ userdata, setUpdate }) => {
   // Normalize user account: array or object support
@@ -56,8 +56,8 @@ export const TransferFunds = ({ userdata, setUpdate }) => {
     setLoading(true);
 
     try {
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/transfer`,
+      await api.post(
+        `/transfer`,
         {
           fromAccount: formData.fromAccount,
           toAccount: formData.toAccount.trim(),

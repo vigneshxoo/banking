@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "../../Api";
 import { FaUserPlus } from "react-icons/fa";
-
+import api from "../../Api";
 export const Deposit = ({ userdata, setUpdate }) => {
   // Guard the input prop
   const user = Array.isArray(userdata) && userdata.length > 0 ? userdata[0] : userdata;
@@ -47,8 +46,8 @@ export const Deposit = ({ userdata, setUpdate }) => {
 
     setLoading(true);
     try {
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/deposit`,
+      await api.post(
+        `/deposit`,
         {
           accountNumber: formData.accountNumber,
           name: formData.accountHolder,

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import axios from "axios";
-import { API_URL } from "../../Api";
 import { FaUser, FaEnvelope, FaPhone, FaUniversity, FaCodeBranch, FaEdit, FaWallet, FaCalendarAlt } from "react-icons/fa";
 import { ProfileCard } from "./ProfileCard";
+import api from "../../Api";
 export const Profiles = ({ userdata, loadings,setUpdate }) => {
   const [transactions, setTransactions] = useState([]);
   const [txError, setTxError] = useState(null);
@@ -15,8 +15,8 @@ export const Profiles = ({ userdata, loadings,setUpdate }) => {
 
 // transection api
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/transhist`, { withCredentials: true })
+    api
+      .get(`/transhist`, { withCredentials: true })
       .then((res) => {
         setTransactions(res.data?.transactions || []);
       })
@@ -33,8 +33,8 @@ let statusid = accounts[0]?._id
 useEffect(() => {
   if (!statusid) return; 
 
-  axios
-    .get(`${import.meta.env.VITE_API_URL}/status/${statusid}`, { withCredentials: true })
+  api
+    .get(`/status/${statusid}`, { withCredentials: true })
     .then((res) => {
       console.log(res.data)
       setStatus(res.data || []);

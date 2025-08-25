@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
-import { API_URL } from "../../Api";
+import api from "../../Api";
 
 const LoanPendingListComponent = () => {
   const [data, setData] = useState([]);
@@ -9,8 +9,8 @@ const LoanPendingListComponent = () => {
   const [postErr, setPostErr] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/admin`, { withCredentials: true })
+    api
+      .get( `/admin`, { withCredentials: true })
       .then((res) => {
         setData(res.data?.loans || []);
       })
@@ -23,8 +23,8 @@ const LoanPendingListComponent = () => {
 
   const sendLoanDetails = async (loanId, status) => {
     try {
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/updatestatus`,
+      await api.post(
+        `/updatestatus`,
         { loanId: loanId, status },
         {
           withCredentials: true,

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import { API_URL } from "../../Api";
 import { FaUserPlus } from "react-icons/fa";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import api from '../../Api';
 
 export const ProfileCard = ({ user, setUpdate }) => {
     const [image, setImage] = useState(null);
@@ -33,8 +33,8 @@ export const ProfileCard = ({ user, setUpdate }) => {
         try {
             const formdata = new FormData();
             formdata.append("profileImg", image);
-            const res = await axios.post(
-                `${import.meta.env.VITE_API_URL}/profilepic`,
+            const res = await api.post(
+                `/profilepic`,
                 formdata,
                 { headers: { "Content-Type": "multipart/form-data" }, withCredentials: true }
             );

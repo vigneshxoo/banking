@@ -2,19 +2,16 @@ import React, { useState } from 'react';
 
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
-import { API_URL } from '../../../Api';
+import api from '../../../Api';
 const Login = ({ onAuthSuccess, setUser }) => {
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    console.log(import.meta.env.API_URL)
-    const apiUrl = import.meta.env.VITE_API_URL;
-    console.log(apiUrl)
-
-    // Adjust this to match your backend URL
+    console.log(import.meta.env.VITE_BACKEND_URL)
+  
     const handleSubmit = async (e) => {
-        console.log(import.meta.env.VITE_API_URL)
+ 
         e.preventDefault();
         console.log(loginData)
         if (!loginData.email.trim() || !loginData.password.trim()) {
@@ -24,8 +21,8 @@ const Login = ({ onAuthSuccess, setUser }) => {
         setError('');
         setLoading(true);
         try {
-            const response = await axios.post(
-                `${import.meta.env.API_URL || API_URL}/login`,
+            const response = await api.post(
+                `/login`,
                 {
                     email: loginData.email.trim(),
                     password: loginData.password.trim(),
@@ -39,25 +36,30 @@ const Login = ({ onAuthSuccess, setUser }) => {
             if (response.status === 200) {
                 // Use 'token' or 'jwt' depending on your backend's key
                 console.log(response)
-                localStorage.setItem("jwt",response.data.jwt);
+                localStorage.setItem("jwt", response.data.jwt);
                 // console.log(localStorage.setItem("jwt"))
                 if (onAuthSuccess) onAuthSuccess();
                 navigate("/home");
             } else {
                 setError(response.data.error || response.data.message || "Invalid credentials");
+                console.log(error)
             }
         } catch (error) {
-            setError(
-                console.log(error),
+
+            const errorMessage =
                 error?.response?.data?.error ||
                 error?.response?.data?.message ||
-                "Login failed"
-            );
+                "Login failed";
+
+            setError(errorMessage);
+            console.log("errr", error)
         } finally {
             setLoading(false);
         }
     };
+    console.log("login route called")
     // Auto-close toast
+    console.log(error)
 
     return (
         <div className="min-h-screen flex items-center justify-center box2 p-4">
@@ -105,7 +107,7 @@ const Login = ({ onAuthSuccess, setUser }) => {
                 </form>
 
                 <div className="mt-6 text-center">
-                    {error && <p className='text-red-500 text-sm mb-2 text-center'>{error}</p>}
+                    {error && <p className='text-red-500  text-sm mb-2 text-center'>{error}</p>}
                     <p className="text-gray-300">
                         Don't have an account?
                         <Link to="/signup" className="text-blue-400 hover:text-blue-300 ml-1 font-semibold">

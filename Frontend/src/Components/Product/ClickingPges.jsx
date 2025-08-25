@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "../../Api";
 import { Link } from "react-router-dom";
 import { Profiles } from "../clickpages/Profiles";
 import { ProfileWithLoan } from "../clickpages/ApplyLoan";
 import { Deposit } from "../clickpages/Deposit";
 import { TransferFunds } from "../clickpages/TransectionFunds";
 import { Withdraw } from "../clickpages/Withdraw";
+import api from "../../Api";
 
 export const Profile = ({ logout }) => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -16,8 +16,8 @@ export const Profile = ({ logout }) => {
   const [update, setUpdate] = useState(false)
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/dash`, { withCredentials: true })
+    api
+      .get(`/dash`, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         setProfile(res.data.Accounts || []);

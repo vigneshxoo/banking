@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../Api";
+import api from "../../Api";
 
 export const Withdraw = ({ userdata, setUpdate }) => {
   // Support userdata as array or object, extract first account if array
@@ -41,8 +41,8 @@ export const Withdraw = ({ userdata, setUpdate }) => {
 
     setLoading(true);
     try {
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/withdraw`,
+      await api.post(
+        `/withdraw`,
         {
           accountNumber: formData.fromAccount,
           amount: formData.amount.trim(),

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../Api";
 import { FaUserPlus } from "react-icons/fa";
+import api from "../../Api";
 
 export const ProfileWithLoan = ({ userdata, setUpdate }) => {
   // Step 1: get the first user object or null
@@ -44,8 +44,8 @@ export const ProfileWithLoan = ({ userdata, setUpdate }) => {
         tenureMonths: Number(formData.tenureMonths),
       };
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/applyloan`,
+      const response = await api.post(
+        `/applyloan`,
         payload,
         {
           withCredentials: true,

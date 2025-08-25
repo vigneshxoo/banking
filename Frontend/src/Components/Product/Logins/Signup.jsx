@@ -195,8 +195,8 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { API_URL } from '../../../Api';
 import axios from 'axios';
+import api from '../../../Api';
 
 const Signup = ({ onAuthSuccess }) => {
   const navigate = useNavigate();
@@ -231,8 +231,8 @@ const Signup = ({ onAuthSuccess }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/create-account`,
+      const response = await api.post(
+        `/create-account`,
         {
           email: formData.email.trim(),
           password: formData.password.trim(),
