@@ -31,7 +31,8 @@ app.use(Router_1.router);
 app.get('/', (req, res) => {
     return res.send("hello vicky");
 });
-app.listen(4000, () => {
-    console.log("app listion posrt 4000");
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
 //# sourceMappingURL=index.js.map

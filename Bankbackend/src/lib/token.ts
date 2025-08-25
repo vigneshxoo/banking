@@ -7,7 +7,6 @@ const generateToken = (userId: any, res: any) => {
     if (!secretKey) {
         return res.status(500).json({ message: "JWT_SECRET is not defined" });
     }
-
     const token = jwt.sign({ userid: userId }, secretKey, { expiresIn: "20d" });
 
     res.cookie("jwt", token, {
