@@ -34,6 +34,7 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"]
 }))
 app.use(router);
+console.log("vignesh")
 
 app.get('/', (req: Request, res: Response) => {
     return res.send("hello vicky");

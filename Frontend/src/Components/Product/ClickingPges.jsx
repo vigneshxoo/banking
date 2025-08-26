@@ -134,7 +134,8 @@ export const Profile = ({ logout }) => {
             Back
           </Link>
           {/* Mobile Logout */}
-          <button className="mt-4 md:hidden bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full text-white w-full">
+          <button   onClick={() => logout()} className="mt-4 md:hidden bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full text-white w-full">
+           
             Log out
           </button>
         </aside>
