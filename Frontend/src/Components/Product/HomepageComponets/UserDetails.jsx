@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 
 export const UserDetails = () => {
     return (
-        <div className="w-full  bg-">
+        <div className="w-full overflow-hidden  bg-">
             {/* Header */}
             <div data-aos="fade-right" className="mt-20 md:mt-40 text-4xl md:text-5xl bg-[#6C4BD4] w-72 md:w-80 font-poppins font-bold text-white p-5 rounded-br-full">
                 <span className="pl-5">About us</span>

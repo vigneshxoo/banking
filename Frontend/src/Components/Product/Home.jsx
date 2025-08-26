@@ -12,12 +12,12 @@ export const Home = () => {
         <div className='bg' >
             <Navbar />
             <Perfectplan />
-            <UserDetails />
+             <UserDetails />
             <CreateAccount />
             <GeneralQues />
             <AutoPlay />
-            <Footer />
-            {/* <Testing/> */}
+            <Footer /> 
+            {/* {/* <Testing/> */}
         </div>
     )
 }

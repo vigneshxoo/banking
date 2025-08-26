@@ -7,10 +7,13 @@ const LoanPendingListComponent = () => {
   const [data, setData] = useState([]);
   const [txError, setTxError] = useState(null);
   const [postErr, setPostErr] = useState(null);
+  const [loading, setLoading] = useState(false)
+  const [loadingIds, setLoadingIds] = useState([]);
+
 
   useEffect(() => {
     api
-      .get( `/admin`, { withCredentials: true })
+      .get(`/admin`, { withCredentials: true })
       .then((res) => {
         setData(res.data?.loans || []);
       })
@@ -22,21 +25,14 @@ const LoanPendingListComponent = () => {
   }, []);
 
   const sendLoanDetails = async (loanId, status) => {
+    setLoadingIds((prev) => [...prev, loanId]); // add id
     try {
-      await api.post(
-        `/updatestatus`,
-        { loanId: loanId, status },
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-
-      // ✅ Update state locally: remove this loan from pending list
+      await api.post("/updatestatus", { loanId, status });
       setData((prev) => prev.filter((loan) => loan._id !== loanId));
     } catch (error) {
-      console.error(error);
       setPostErr(error?.response?.data?.error || "Error updating loan status");
+    } finally {
+      setLoadingIds((prev) => prev.filter((id) => id !== loanId)); // remove id
     }
   };
 
@@ -81,16 +77,25 @@ const LoanPendingListComponent = () => {
                 </td>
                 <td className="p-3 border-b flex border-gray-700 text-center space-x-2">
                   <button
+                    disabled={loadingIds.includes(loan._id)}
                     onClick={() => sendLoanDetails(loan._id, "Approved")}
-                    className="flex items-center justify-center gap-2 text-green-400 hover:bg-green-700 font-semibold py-1 px-3 md:px-4 rounded-md transition"
+                    className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2 disabled:opacity-50"
                   >
+                    {loadingIds.includes(loan._id) && (
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    )}
+                    Approve
                     <FaCheck size={16} />
-                    <span className="hidden md:inline">Approve</span>
                   </button>
+
                   <button
+                    disabled={loadingIds.includes(loan._id)}
                     onClick={() => sendLoanDetails(loan._id, "Rejected")}
                     className="flex items-center justify-center gap-2 hover:bg-red-700 hover:text-white text-red-500 font-semibold py-1 px-3 md:px-4 rounded-md transition"
                   >
+                    {loadingIds.includes(loan._id) && (
+                      <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+                    )}
                     <FaTimes size={16} />
                     <span className="hidden md:inline">Reject</span>
                   </button>
@@ -131,20 +136,29 @@ const LoanPendingListComponent = () => {
             </p>
 
             {/* Actions */}
-            <div className="flex justify-end gap-2 pt-2">
-              <button
-                onClick={() => sendLoanDetails(loan._id, "Approved")}
-                className="flex items-center justify-center gap-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded-md transition"
-              >
-                <FaCheck size={14} /> Approve
-              </button>
-              <button
-                onClick={() => sendLoanDetails(loan._id, "Rejected")}
-                className="flex items-center justify-center gap-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded-md transition"
-              >
-                <FaTimes size={14} /> Reject
-              </button>
-            </div>
+            <button
+              disabled={loadingIds.includes(loan._id)}
+              onClick={() => sendLoanDetails(loan._id, "Approved")}
+              className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2 disabled:opacity-50"
+            >
+              {loadingIds.includes(loan._id) && (
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              )}
+              Approve
+              <FaCheck size={16} />
+            </button>
+
+            <button
+              disabled={loadingIds.includes(loan._id)}
+              onClick={() => sendLoanDetails(loan._id, "Rejected")}
+              className="flex items-center justify-center gap-2 hover:bg-red-700 hover:text-white text-red-500 font-semibold py-1 px-3 md:px-4 rounded-md transition"
+            >
+              {loadingIds.includes(loan._id) && (
+                <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+              )}
+              <FaTimes size={16} />
+              <span className="hidden md:inline">Reject</span>
+            </button>
           </div>
         ))}
       </div>
